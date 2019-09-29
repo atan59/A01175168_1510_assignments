@@ -114,52 +114,19 @@ def time_calculator(seconds):
     >>> time_calculator(86461)
     1 Day/s 0 Hour/s 1 Minute/s 1 Second/s
     """
-    if seconds >= 86400:
-        days = calculate_days(seconds)
-        seconds = seconds - calculate_seconds_in_days(days)
 
-        hours = calculate_hours(seconds)
-        seconds = seconds - calculate_seconds_in_hours(hours)
+    days = calculate_days(seconds)
+    seconds = seconds - calculate_seconds_in_days(days)
 
-        minutes = calculate_minutes(seconds)
-        seconds = seconds - calculate_seconds_in_minutes(minutes)
+    hours = calculate_hours(seconds)
+    seconds = seconds - calculate_seconds_in_hours(hours)
 
-        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
+    minutes = calculate_minutes(seconds)
+    seconds = seconds - calculate_seconds_in_minutes(minutes)
 
-        print(total_time)
-    elif 86400 > seconds >= 3600:
-        days = 0
+    total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
 
-        hours = calculate_hours(seconds)
-        seconds = seconds - calculate_seconds_in_hours(hours)
-
-        minutes = calculate_minutes(seconds)
-        seconds = seconds - calculate_seconds_in_minutes(minutes)
-
-        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
-
-        print(total_time)
-    elif 3600 > seconds >= 60:
-        days = 0
-
-        hours = 0
-
-        minutes = calculate_minutes(seconds)
-        seconds = seconds - calculate_seconds_in_minutes(minutes)
-
-        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
-
-        print(total_time)
-    elif 60 > seconds >= 0:
-        days = 0
-
-        hours = 0
-
-        minutes = 0
-
-        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
-
-        print(total_time)
+    print(total_time)
 
 
 def main():
