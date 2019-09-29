@@ -12,7 +12,10 @@ def colour_mixer():
 
     colour_2 = (input("Enter one primary colour: ")).lower()
 
-    if colour_1 == colour_2:
+    if colour_2 != "red" or "yellow" or "blue":
+        print("You have entered an invalid colour.")
+
+    elif colour_1 == colour_2:
         print("You have entered two of the same colour.")
 
     elif colour_1 == "red":

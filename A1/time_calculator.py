@@ -1,4 +1,5 @@
 """"Convert seconds into days, hours, and minutes"""
+import doctest
 
 
 def calculate_days(time):
@@ -9,6 +10,10 @@ def calculate_days(time):
     :precondition: time must be a positive int
     :postcondition: Calculate number of days
     :return: an int
+    >>> calculate_days(86400)
+    1
+    >>> calculate_days(172800)
+    2
     """
     return int(time / 86400)
 
@@ -21,6 +26,10 @@ def calculate_seconds_in_days(days):
     :precondition: days must be a positive int
     :postcondition: Calculate number of seconds
     :return: an int
+    >>> calculate_seconds_in_days(1)
+    86400
+    >>> calculate_seconds_in_days(2)
+    172800
     """
     return int(days * 86400)
 
@@ -33,6 +42,10 @@ def calculate_hours(time):
     :precondition: time must be a positive int
     :postcondition: Calculate number of hours
     :return: an int
+    >>> calculate_hours(3600)
+    1
+    >>> calculate_hours(7200)
+    2
     """
     return int(time / 3600)
 
@@ -45,6 +58,10 @@ def calculate_seconds_in_hours(hours):
     :precondition: hours must be a positive int
     :postcondition: Calculate number of seconds
     :return: an int
+    >>> calculate_seconds_in_hours(1)
+    3600
+    >>> calculate_seconds_in_hours(2)
+    7200
     """
     return int(hours * 3600)
 
@@ -57,6 +74,10 @@ def calculate_minutes(time):
     :precondition: time must be a positive int
     :postcondition: Calculate number of minutes
     :return: an int
+    >>> calculate_minutes(60)
+    1
+    >>> calculate_minutes(120)
+    2
     """
     return int(time / 60)
 
@@ -69,56 +90,12 @@ def calculate_seconds_in_minutes(minutes):
     :precondition: minutes must be positive int
     :postcondition: Calculate number of seconds
     :return: an int
+    >>> calculate_seconds_in_minutes(1)
+    60
+    >>> calculate_seconds_in_minutes(2)
+    120
     """
     return int(minutes * 60)
-
-
-def concatenate_two_strings(string_1, string_2):
-    """
-    Combine two strings into one string
-
-    :param string_1: a string
-    :param string_2: a string
-    :precondition: string_1 must not be an empty string
-    :precondition: string_2 must not be an empty string
-    :postcondition: Combine the two strings into one string
-    :return: a string
-    """
-    return str(string_1), str(string_2)
-
-
-def concatenate_three_strings(string_1, string_2, string_3):
-    """
-    Combine three strings into one string.
-
-    :param string_1: a string
-    :param string_2: a string
-    :param string_3: a string
-    :precondition: string_1 must not be an empty string
-    :precondition: string_2 must not be an empty string
-    :precondition: string_3 must not be an empty string
-    :postcondition: Combine the three strings into one string
-    :return: a string
-    """
-    return str(string_1), str(string_2), str(string_3)
-
-
-def concatenate_four_strings(string_1, string_2, string_3, string_4):
-    """
-    Combine four strings into one string.
-
-    :param string_1: a string
-    :param string_2: a string
-    :param string_3: a string
-    :param string_4: a string
-    :precondition: string_1 must not be an empty string
-    :precondition: string_2 must not be an empty string
-    :precondition: string_3 must not be an empty string
-    :precondition: string_4 must not be an empty string
-    :postcondition: Combine the four strings into one string
-    :return: a string
-    """
-    return str(string_1), str(string_2), str(string_3), str(string_4)
 
 
 def time_calculator(seconds):
@@ -128,6 +105,14 @@ def time_calculator(seconds):
     :param seconds: an int
     :precondition: seconds must be a positive int
     :postcondition: Calculate days, hours, minutes, and seconds
+    >>> time_calculator(1)
+    0 Day/s 0 Hour/s 0 Minute/s 1 Second/s
+    >>> time_calculator(61)
+    0 Day/s 0 Hour/s 1 Minute/s 1 Second/s
+    >>> time_calculator(3601)
+    0 Day/s 1 Hour/s 0 Minute/s 1 Second/s
+    >>> time_calculator(86461)
+    1 Day/s 0 Hour/s 1 Minute/s 1 Second/s
     """
     if seconds >= 86400:
         days = calculate_days(seconds)
@@ -139,23 +124,47 @@ def time_calculator(seconds):
         minutes = calculate_minutes(seconds)
         seconds = seconds - calculate_seconds_in_minutes(minutes)
 
-        total_time = concatenate_four_strings(days, hours, minutes, seconds)
+        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
 
         print(total_time)
     elif 86400 > seconds >= 3600:
+        days = 0
+
         hours = calculate_hours(seconds)
         seconds = seconds - calculate_seconds_in_hours(hours)
 
         minutes = calculate_minutes(seconds)
         seconds = seconds - calculate_seconds_in_minutes(minutes)
 
-        total_time = concatenate_four_strings(hours, minutes, seconds)
+        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
 
         print(total_time)
     elif 3600 > seconds >= 60:
+        days = 0
+
+        hours = 0
+
         minutes = calculate_minutes(seconds)
         seconds = seconds - calculate_seconds_in_minutes(minutes)
 
-        total_time = concatenate_four_strings(minutes, seconds)
+        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
 
         print(total_time)
+    elif 60 > seconds >= 0:
+        days = 0
+
+        hours = 0
+
+        minutes = 0
+
+        total_time = "%d Day/s %d Hour/s %d Minute/s %d Second/s" % (days, hours, minutes, seconds)
+
+        print(total_time)
+
+
+def main():
+    doctest.testmod()
+
+
+if __name__ == "__main__":
+    main()
