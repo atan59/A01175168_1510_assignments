@@ -129,9 +129,5 @@ def time_calculator(seconds):
     print(total_time)
 
 
-def main():
-    doctest.testmod()
-
-
 if __name__ == "__main__":
-    main()
+    doctest.testmod()
