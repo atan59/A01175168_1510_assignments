@@ -87,3 +87,10 @@ def number_translator():
 
 if __name__ == "__main__":
     doctest.testmod()
+
+
+"""
+First I used decomposition to break the main function into smalled functions. I then use pattern matching to create
+helper functions with blocks of repeated code. Next, I used automation to put the main function into organized steps to
+execute the task.
+"""

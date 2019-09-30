@@ -269,5 +269,8 @@ if __name__ == "__main__":
 
 
 """
-
+First I used decomposition to break the function into separate sections and then even smaller sections within those
+sections. This was done to reduce the size of each function and make sure that they only do one thing. After I
+decomposed the main function, I used pattern matching to find blocks of code that are repeated and made those into
+helper functions. I then used automation to execute the main function in organized steps.
 """

@@ -34,5 +34,6 @@ if __name__ == "__main__":
 
 
 """
-
+I used abstraction to ignore any details that would cause the function to have an error when it is run. I then used
+automation to organize the main function into well-defined steps to execute the task.
 """

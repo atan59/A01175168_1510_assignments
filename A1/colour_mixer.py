@@ -100,3 +100,10 @@ def colour_mixer():
 
 if __name__ == "__main__":
     doctest.testmod()
+
+
+"""
+For the colour_mixer function, I first used decomposition to break the function into individual steps. I then tried to
+look for repeated blocks of code within the main function and turned those into helper functions. I then used automation
+to execute the task in organized steps.
+"""

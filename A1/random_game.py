@@ -122,3 +122,10 @@ def rock_paper_scissors():
 
 if __name__ == "__main__":
     doctest.testmod()
+
+
+"""
+I first used decomposition to break the main function into multiple parts. Then I use pattern matching to help when I
+was writing the helper functions so that I can cut down on the amount of "if" statements used. I then used automation to
+create the main function with well-defined steps to execute the short game.
+"""

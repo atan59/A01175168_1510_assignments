@@ -131,3 +131,9 @@ def time_calculator(seconds):
 
 if __name__ == "__main__":
     doctest.testmod()
+
+
+"""
+I took the main function and decomposed it into multiple steps. Then I used automation to organize my functions into
+an organized way to execute the task.
+"""
