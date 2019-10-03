@@ -6,7 +6,7 @@ def number_generator():
     """
     Generate a list of six unique numbers from 0 to 49.
     """
-    result = random.sample(range(50), 6)
+    result = random.sample(range(49), 6)
     result.sort()
     print("The lottery numbers are:", result)
 
