@@ -269,7 +269,6 @@ def combat_round(opponent_one, opponent_two):
     :precondition: opponent_two must be a correctly formatted dictionary
     :postcondition: run a single round of combat
     """
-    print("*~~~~~~~~~~Combat Round~~~~~~~~~~*")
     if check_first_attack() == 1:
         print(opponent_one['Name'] + " rolled a higher number so they get to attack first.")
         if check_dex_roll(opponent_one, opponent_two):
@@ -424,6 +423,7 @@ def main():
             print_character(character)
 
         print("\nNow let's have a short combat round!")
+        print("\n*~~~~~~~~~~Combat Round~~~~~~~~~~*")
         combat_round(character, opponent)
         print("\nThat's the end of the combat round!")
 
