@@ -24,6 +24,40 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
+def choose_inventory(inventory):
+    """
+    Buy items from a shop.
+
+    :param inventory: a list
+    :precondition: inventory must be a populated list
+    :postcondition: allow player to buy items from a shop inventory
+    :return: a sorted list
+    """
+    purchased = []
+    choice = 0
+    purchases_made = 0
+
+    print("*~~~~~~~~~~Welcome to " + inventory[0] + "!~~~~~~~~~~*\n" +
+          "To buy an item, type the number of the item.\n" +
+          "If you are finished and would like to exit the shop, type -1.\n")
+
+    while choice >= 0:
+        print("\nHere is the list of the items we sell:\n" + "*~~~~~~~~~~~~~~~Items~~~~~~~~~~~~~~~*")
+        for i in range(1, len(inventory)):
+            print(str(i) + ". " + inventory[i])
+
+        choice = int(input("\nWhat would you like you buy? (-1 to exit): "))
+
+        if choice > 0:
+            purchased.append(inventory[choice])
+            print("\nYou have purchased one " + inventory[choice] + ".")
+
+            purchases_made += 1
+            print("You have purchased a total of " + str(purchases_made) + " items from the shop.\n")
+
+    return sorted(purchased)
+
+
 def generate_vowel():
     """
     Generate a random vowel.
