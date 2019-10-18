@@ -425,8 +425,6 @@ def main():
         print("\nNow let's have a short combat round!")
         print("\n*~~~~~~~~~~Combat Round~~~~~~~~~~*")
         combat_round(character, opponent)
-        print_character(character)
-        print_character(opponent)
         print("\nThat's the end of the combat round!")
 
         end_demo = (input("Would you like to end the demo? (\"y\" or \"n\"): ")).lower()
