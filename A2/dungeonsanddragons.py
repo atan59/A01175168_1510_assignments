@@ -24,35 +24,6 @@ def roll_die(number_of_rolls, number_of_sides):
     return total
 
 
-def choose_inventory(inventory, selection):
-    """
-    Choose a certain number of items in an inventory.
-
-    :param inventory: a list
-    :param selection: a positive int
-    :precondition: inventory must be a populated list
-    :precondition: selection must be a positive int
-    :postcondition: make a list with randomly selected items from the inventory
-    :return: a list
-    """
-    if (inventory == []) and (selection == 0):
-        result = []
-    elif (inventory != []) and (selection == 0):
-        result = []
-    elif selection < 0:
-        print("You can't make a negative selection!")
-        result = []
-    elif selection > len(inventory):
-        print("Your selection is greater than the amount of items in the inventory.")
-        result = sorted(inventory)
-    elif selection == len(inventory):
-        result = sorted(inventory)
-    else:
-        result = random.choices(inventory, None, k=selection)
-        result = sorted(result)
-    return result
-
-
 def generate_vowel():
     """
     Generate a random vowel.
@@ -103,6 +74,94 @@ def generate_name(syllables):
     return name.capitalize()
 
 
+def select_race():
+    """
+    Select a race for the character.
+
+    :return: a string
+    """
+    races = ['dragonborn', 'dwarf', 'elf', 'gnome', 'half-elf', 'halfling', 'half-orc', 'human', 'tiefling']
+    print("\n*~~~~~Choose Your Race~~~~~*\n" +
+          "Here's a list of races you can choose from.\n" +
+          "Please type the number of the race you would like to pick. (e.g. 1)\n" +
+          "1. Dragonborn\n" + "2. Dwarf\n" + "3. Elf\n" + "4. Gnome\n" + "5. Half-Elf\n" + "6. Halfling\n" +
+          "7. Half-Orc\n" + "8. Human\n" + "9. Tiefling\n")
+
+    choice = int(input("Your Race Choice: "))
+
+    while choice < 1 or choice > 9:
+        print_character("You have entered an invalid choice.\n" + "Please choose again.\n" +
+                        "Here's the list of valid choices.\n" +
+                        "Please type the number of the class you would like to pick. (e.g. 1)\n" +
+                        "1. Dragonborn\n" + "2. Dwarf\n" + "3. Elf\n" + "4. Gnome\n" + "5. Half-Elf\n" +
+                        "6. Halfling\n" + "7. Half-Orc\n" + "8. Human\n" + "9. Tiefling\n")
+        choice = int(input("Your Race Choice: "))
+
+    return races[choice - 1]
+
+
+def select_class():
+    """
+    Select a class for the character.
+
+    :return: a list
+    """
+    player_class =['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rouge', 'sorcerer',
+                   'warlock', 'wizard']
+    print("\n*~~~~~Choose Your Class~~~~~*\n" +
+          "Here's a list of classes you can choose from.\n" +
+          "Please type the number of the class you would like to pick. (e.g. 1)\n" +
+          "1. Barbarian\n" + "2. Bard\n" + "3. Cleric\n" + "4. Druid\n" + "5. Fighter\n" + "6. Monk\n" +
+          "7. Paladin\n" + "8. Ranger\n" + "9. Rouge\n" + "10. Sorcerer\n" + "11. Warlock\n" + "12. Wizard\n")
+
+    choice = int(input("Your Class Choice: "))
+
+    while choice < 1 or choice > 12:
+        print("You have entered an invalid choice.\n" + "Please choose again.\n" +
+              "Here's the list of valid choices.\n" +
+              "Please type the number of the class you would like to pick. (e.g. 1)\n" +
+              "1. Barbarian\n" + "2. Bard\n" + "3. Cleric\n" + "4. Druid\n" + "5. Fighter\n" + "6. Monk\n" +
+              "7. Paladin\n" + "8. Ranger\n" + "9. Rouge\n" + "10. Sorcerer\n" + "11. Warlock\n" + "12. Wizard\n")
+
+    return player_class[choice - 1]
+
+
+def get_class_hit_die(character_class):
+    """
+    Get the number of sides of the character's hit die based on their class.
+
+    :param character_class: a string
+    :precondition: character_class must be a string with a valid class
+    :postcondition: Get the number of sides of the die for the character's class
+    :return: an int
+
+    >>> get_class_hit_die('wizard')
+    6
+    >>> get_class_hit_die('bard')
+    8
+    >>> get_class_hit_die('fighter')
+    10
+    >>> get_class_hit_die('barbarian')
+    12
+    """
+    six_side = ['sorcerer', 'wizard']
+    eight_side = ['bard', 'cleric', 'druid', 'monk', 'rouge', 'warlock']
+    ten_side = ['fighter', 'paladin', 'ranger']
+    twelve_side = ['barbarian']
+
+    side = 0
+
+    if character_class in six_side:
+        side = 6
+    elif character_class in eight_side:
+        side = 8
+    elif character_class in ten_side:
+        side = 10
+    elif character_class in twelve_side:
+        side = 12
+    return side
+
+
 def create_character(name_length):
     """
     Create a character with a name and six attributes.
@@ -115,77 +174,52 @@ def create_character(name_length):
     if name_length < 0:
         print("This is an invalid name length.")
     else:
-        character_stats = []
+        character_stats = {}
         attribute_names = ['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma']
 
-        character_stats.append(generate_name(name_length))
+        character_stats['Name'] = generate_name(name_length)
+        character_stats['Race'] = select_race()
+
+        character_stats['Class'] = select_class()
+
+        hp = roll_die(1, get_class_hit_die(character_stats['Class']))
+        character_stats['HP'] = [hp, hp]
 
         for i in range(0, 6):
-            attribute = [attribute_names[i], roll_die(3, 6)]
-            character_stats.append(attribute)
+            character_stats[attribute_names[i]] = roll_die(3, 6)
+
+        character_stats['XP'] = 0
+        character_stats['Inventory'] = []
         return character_stats
 
 
 def print_character(character):
     """
-    Print character information.
+    Print a character sheet with all character information.
 
-    :param character: a list
-    :precondition: character must be a populated list
-    :postcondition: print character information
-
-    >>> print_character(["Name", ['Strength', 3], ['Dexterity', 4], ['Constitution', 5], ['Intelligence', 6], \
-    ['Wisdom', 7], ['Charisma', 8]])
-    *~~~~~~~~~~Character Sheet~~~~~~~~~~*
-    Name: Name
-    *~~~~~~~~~~~~~~~Stats~~~~~~~~~~~~~~~*
-    Strength: 3
-    Dexterity: 4
-    Constitution: 5
-    Intelligence: 6
-    Wisdom: 7
-    Charisma: 8
-    >>> print_character(["Name", ['Strength', 3], ['Dexterity', 4], ['Constitution', 5], ['Intelligence', 6], \
-    ['Wisdom', 7], ['Charisma', 8],['Shield', 'Sword']])
-    *~~~~~~~~~~Character Sheet~~~~~~~~~~*
-    Name: Name
-    *~~~~~~~~~~~~~~~Stats~~~~~~~~~~~~~~~*
-    Strength: 3
-    Dexterity: 4
-    Constitution: 5
-    Intelligence: 6
-    Wisdom: 7
-    Charisma: 8
-    *~~~~~~~~~~Inventory~~~~~~~~~~*
-    1. Shield
-    2. Sword
+    :param character: a dictionary
+    :precondition: character must be a correctly formatted dictionary
+    :postcondition: print a filled out character sheet
     """
-    result = "*~~~~~~~~~~Character Sheet~~~~~~~~~~*" + "\n" + \
-             "Name: " + character[0] + "\n" + \
-             "*~~~~~~~~~~~~~~~Stats~~~~~~~~~~~~~~~*" + "\n"
+    result = "\n*~~~~~~~~~~Character Sheet~~~~~~~~~~*\n" + \
+             "Name: " + character['Name'] + "\n" + \
+             "Race: " + character['Race'].capitalize() + "\n" + \
+             "Class: " + character['Class'].capitalize() + "\n" + \
+             "HP: " + str(character['HP'][0]) + "/" + str(character['HP'][1]) + "\n" + \
+             "XP: " + str(character['XP']) + "\n" + \
+             "*~~~~~~~~~~~~~~~Stats~~~~~~~~~~~~~~~*\n" + \
+             "Strength: " + str(character['Strength']) + "\n" + \
+             "Dexterity: " + str(character['Dexterity']) + "\n" + \
+             "Constitution: " + str(character['Constitution']) + "\n" + \
+             "Intelligence: " + str(character['Intelligence']) + "\n" + \
+             "Wisdom: " + str(character['Wisdom']) + "\n" + \
+             "Charisma: " + str(character['Charisma']) + "\n" + \
+             "*~~~~~~~~~~~~~Inventory~~~~~~~~~~~~~*\n"
 
-    for i in range(1, 7):
-        if len(character) == 8:
-            result += character[i][0] + ": " + str(character[i][1]) + "\n"
-        else:
-            if i == 6:
-                result += character[i][0] + ": " + str(character[i][1])
-            else:
-                result += character[i][0] + ": " + str(character[i][1]) + "\n"
+    if not character['Inventory']:
+        result += "Nothing...\n"
+    else:
+        for i in range(0, len(character['Inventory'])):
+            result += str(i + 1) + ". " + character['Inventory'][i] + "\n"
 
-    if len(character) == 8:
-        result += "*~~~~~~~~~~Inventory~~~~~~~~~~*" + "\n"
-        for i in range(0, len(character[7])):
-            if i == len(character[7]) - 1:
-                result += str(i + 1) + ". " + character[7][i]
-            else:
-                result += str(i + 1) + ". " + character[7][i] + "\n"
     print(result)
-
-
-def main():
-    doctest.testmod()
-
-
-if __name__ == "__main__":
-    main()
