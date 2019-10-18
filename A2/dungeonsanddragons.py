@@ -257,3 +257,129 @@ def print_character(character):
             result += str(i + 1) + ". " + character['Inventory'][i] + "\n"
 
     print(result)
+
+
+def combat_round(opponent_one, opponent_two):
+    """
+    Run a single round of combat.
+
+    :param opponent_one: a dictionary
+    :param opponent_two: a dictionary
+    :precondition: opponent_one must be a correctly formatted dictionary
+    :precondition: opponent_two must be a correctly formatted dictionary
+    :postcondition: run a single round of combat
+    """
+    print("*~~~~~~~~~~Combat Round~~~~~~~~~~*")
+    if check_first_attack() == 1:
+        print(opponent_one['Name'] + " rolled a higher number so they get to attack first.")
+        if check_dex_roll(opponent_one, opponent_two):
+            attack(opponent_one, opponent_two)
+            if check_if_alive(opponent_two):
+                print("\nNow it is " + opponent_two['Name'] + "'s turn to attack!")
+                if check_dex_roll(opponent_two, opponent_one):
+                    attack(opponent_two, opponent_one)
+                    check_if_alive(opponent_one)
+        else:
+            print("\nNow it is " + opponent_two['Name'] + "'s turn to attack!")
+            if check_dex_roll(opponent_two, opponent_one):
+                attack(opponent_two, opponent_one)
+                check_if_alive(opponent_one)
+
+    else:
+        print(opponent_two['Name'] + " rolled a higher number so they get to attack first.")
+        if check_dex_roll(opponent_two, opponent_one):
+            attack(opponent_two, opponent_one)
+            if check_if_alive(opponent_one):
+                print("\nNow it is " + opponent_one['Name'] + "'s turn to attack!")
+                if check_dex_roll(opponent_one, opponent_two):
+                    attack(opponent_one, opponent_two)
+                    check_if_alive(opponent_two)
+        else:
+            print("\nNow it is " + opponent_one['Name'] + "'s turn to attack!")
+            if check_dex_roll(opponent_one, opponent_two):
+                attack(opponent_one, opponent_two)
+                check_if_alive(opponent_two)
+
+
+def check_first_attack():
+    """
+    Check which opponent attacks first.
+
+    :return: an int
+    """
+    opponent_one = 0
+    opponent_two = 0
+
+    while opponent_one == opponent_two:
+        opponent_one = roll_die(1, 20)
+        opponent_two = roll_die(1, 20)
+
+    if opponent_one > opponent_two:
+        result = 1
+    else:
+        result = 2
+
+    return result
+
+
+def check_dex_roll(attacker, victim):
+    """
+    Check if attacker's roll is greater than victim's dexterity.
+
+    :param attacker: a dictionary
+    :param victim: a dictionary
+    :precondition: attacker must be a correctly formatted dictionary
+    :precondition: victim must be a correctly formatted dictionary
+    :postcondition: check if attacker's roll is greater than victim's dexterity
+    :return: a boolean
+    """
+    dex_roll = roll_die(1, 20)
+    print("\n" + attacker['Name'] + " rolled a " + str(dex_roll) + ".")
+    print(victim['Name'] + " has a dexterity of " + str(victim['Dexterity']) + ".")
+
+    if dex_roll > victim['Dexterity']:
+        print("\n" + attacker['Name'] + " successfully attacked!")
+        result = True
+    else:
+        print("\n" + attacker['Name'] + " unsuccessfully attacked!")
+        result = False
+
+    return result
+
+
+def attack(attacker, victim):
+    """
+    Attack another character.
+
+    :param attacker: a dictionary
+    :param victim: a dictionary
+    :precondition: attacker must be a correctly formatted dictionary
+    :precondition:  victim must be a correctly formatted dictionary
+    :postcondition: attacker attacks victim
+    """
+    hit_points = roll_die(1, get_class_hit_die(attacker['Class']))
+
+    victim['HP'][1] = victim['HP'][1] - hit_points
+    print("\n" + attacker['Name'] + " dealt " + str(hit_points) + " damage!")
+
+    if victim['HP'][1] < 0:
+        victim['HP'][1] = 0
+
+    print(victim['Name'] + " has " + str(victim['HP'][1]) + " HP left.")
+
+
+def check_if_alive(character):
+    """
+    Check if character is alive.
+
+    :param character: a dictionary
+    :precondition: character must be a correctly formatted dictionary
+    :postcondition: check if character is alive
+    """
+    if character['HP'][1] == 0:
+        print("\n" + character['Name'] + " is dead!")
+        result = False
+    else:
+        print("\n" + character['Name'] + " is alive!")
+        result = True
+    return result
