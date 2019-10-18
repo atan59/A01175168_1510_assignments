@@ -124,11 +124,11 @@ def select_race():
     choice = int(input("Your Race Choice: "))
 
     while choice < 1 or choice > 9:
-        print_character("You have entered an invalid choice.\n" + "Please choose again.\n" +
-                        "Here's the list of valid choices.\n" +
-                        "Please type the number of the class you would like to pick. (e.g. 1)\n" +
-                        "1. Dragonborn\n" + "2. Dwarf\n" + "3. Elf\n" + "4. Gnome\n" + "5. Half-Elf\n" +
-                        "6. Halfling\n" + "7. Half-Orc\n" + "8. Human\n" + "9. Tiefling\n")
+        print("You have entered an invalid choice.\n" + "Please choose again.\n" +
+              "Here's the list of valid choices.\n" +
+              "Please type the number of the class you would like to pick. (e.g. 1)\n" +
+              "1. Dragonborn\n" + "2. Dwarf\n" + "3. Elf\n" + "4. Gnome\n" + "5. Half-Elf\n" +
+              "6. Halfling\n" + "7. Half-Orc\n" + "8. Human\n" + "9. Tiefling\n")
         choice = int(input("Your Race Choice: "))
 
     return races[choice - 1]
