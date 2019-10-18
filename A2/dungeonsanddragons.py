@@ -41,7 +41,7 @@ def choose_inventory(inventory):
           "To buy an item, type the number of the item.\n" +
           "If you are finished and would like to exit the shop, type -1.\n")
 
-    while (len(inventory) - 1) > choice > 0:
+    while choice > 0:
         print("\nHere is the list of the items we sell:\n" + "*~~~~~~~~~~~~~~~Items~~~~~~~~~~~~~~~*")
         for i in range(1, len(inventory)):
             print(str(i) + ". " + inventory[i])
@@ -239,7 +239,7 @@ def print_character(character):
              "Name: " + character['Name'] + "\n" + \
              "Race: " + character['Race'].capitalize() + "\n" + \
              "Class: " + character['Class'].capitalize() + "\n" + \
-             "HP: " + str(character['HP'][0]) + "/" + str(character['HP'][1]) + "\n" + \
+             "HP: " + str(character['HP'][1]) + "/" + str(character['HP'][0]) + "\n" + \
              "XP: " + str(character['XP']) + "\n" + \
              "*~~~~~~~~~~~~~~~Stats~~~~~~~~~~~~~~~*\n" + \
              "Strength: " + str(character['Strength']) + "\n" + \
@@ -425,6 +425,8 @@ def main():
         print("\nNow let's have a short combat round!")
         print("\n*~~~~~~~~~~Combat Round~~~~~~~~~~*")
         combat_round(character, opponent)
+        print_character(character)
+        print_character(opponent)
         print("\nThat's the end of the combat round!")
 
         end_demo = (input("Would you like to end the demo? (\"y\" or \"n\"): ")).lower()
