@@ -383,3 +383,56 @@ def check_if_alive(character):
         print("\n" + character['Name'] + " is alive!")
         result = True
     return result
+
+
+def main():
+    """
+    Run a demo for the game.
+    """
+    shop_inventory = ['The Fantastic Plane Tradepost', 'Adamantine Armor', 'Demon Armor', 'Dwarven Plate',
+                      'Mariner\'s Armor', 'Sentinel Shield', 'Spellguard Shield', 'Sun Blade',
+                      'Wand of Enemy Destruction', 'Javelin of Lightning']
+
+    end_demo = "n"
+    while end_demo == "n":
+        print("\n*~~~~~~~~~~Dungeons and Dragons Demo~~~~~~~~~~*\n")
+        print("Welcome to the demo!\n" + "Let's start off by creating your character!\n")
+
+        name_length_1 = int(input("How many syllables do you want in your name?: "))
+
+        character = create_character(name_length_1)
+
+        print("\nHere's your character's stats!")
+        print_character(character)
+
+        print("Now let's create an opponent!\n")
+
+        name_length_2 = int(input("How many syllables do you want in your opponent's name?: "))
+
+        opponent = create_character(name_length_2)
+
+        print("\nHere's your opponent's stats!")
+        print_character(opponent)
+
+        enter_shop = (input("Would you like to go into the shop? (\"y\" or \"n\"): ")).lower()
+
+        if enter_shop == "y":
+            character['Inventory'] = choose_inventory(shop_inventory)
+
+            print("\nHere's your updated character stats!")
+            print("\nThe items you've purchased are now in your inventory!")
+            print_character(character)
+
+        print("\nNow let's have a short combat round!")
+        combat_round(character, opponent)
+        print("\nThat's the end of the combat round!")
+
+        end_demo = (input("Would you like to end the demo? (\"y\" or \"n\"): ")).lower()
+
+    print("*~~~~~~~~~~~~~~~~~~~~The End~~~~~~~~~~~~~~~~~~~~*")
+
+    doctest.testmod()
+
+
+if __name__ == "__main__":
+    main()
