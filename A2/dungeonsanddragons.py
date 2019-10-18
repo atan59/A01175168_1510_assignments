@@ -41,7 +41,7 @@ def choose_inventory(inventory):
           "To buy an item, type the number of the item.\n" +
           "If you are finished and would like to exit the shop, type -1.\n")
 
-    while choice >= 0:
+    while (len(inventory) - 1) > choice > 0:
         print("\nHere is the list of the items we sell:\n" + "*~~~~~~~~~~~~~~~Items~~~~~~~~~~~~~~~*")
         for i in range(1, len(inventory)):
             print(str(i) + ". " + inventory[i])
