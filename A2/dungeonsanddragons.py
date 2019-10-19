@@ -34,7 +34,7 @@ def choose_inventory(inventory):
     :return: a sorted list
     """
     purchased = []
-    choice = 0
+    choice = 1
     purchases_made = 0
 
     print("*~~~~~~~~~~Welcome to " + inventory[0] + "!~~~~~~~~~~*\n" +
@@ -54,6 +54,9 @@ def choose_inventory(inventory):
 
             purchases_made += 1
             print("You have purchased a total of " + str(purchases_made) + " items from the shop.\n")
+
+    choice = 1
+    purchases_made = 0
 
     return sorted(purchased)
 
