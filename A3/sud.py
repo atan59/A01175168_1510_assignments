@@ -43,6 +43,24 @@ def print_board(character_stats):
     print("".join(printed_board))
 
 
+def combat_round(character, monster):
+    """
+    Run a single round of combat.
+
+    :param character: a dictionary
+    :param monster: a dictionary
+    :precondition: character must be a correctly formatted dictionary
+    :precondition: monster must be a correctly formatted dictionary
+    :postcondition: run a round of combat until someone dies
+    """
+    while check_if_alive(character) and check_if_alive(monster):
+        if check_first_attack() == 1:
+            print(character['Name'] + " attacks first!")
+            attack(character, monster)
+        elif check_first_attack() == 2:
+            print(monster['Name'] + " attacks first!")
+            attack(monster, character)
+
 
 
 if __name__ == "__main__":
