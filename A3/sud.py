@@ -116,6 +116,34 @@ def check_if_alive(character):
     return result
 
 
+def fight_or_flight_choice(monster, character):
+    """
+    Handle monster encounter.
+
+    :param monster: a dictionary
+    :param character: a dictionary
+    :precondition: monster must be a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: handle monster encounter event
+    :return: an int
+    """
+    choice = input("Would you like to fight this monster or flee? (\"1\" = Fight | \"2\" = Flee): ")
+    while choice not in ['1', '2']:
+        choice = input("Would you like to fight this monster or flee? (\"1\" = Fight | \"2\" = Flee): ")
+    if choice == "1":
+        combat_round(character, monster)
+        if check_if_alive(character):
+            result = 1
+        else:
+            result = 0
+    elif choice == "2":
+        if check_flee_chance():
+            print("You successfully ran away!")
+        else:
+            print("The monster stabbed you as you ran!")
+            flee_attack(monster, character)
+    return result
+
 
 
 if __name__ == "__main__":
