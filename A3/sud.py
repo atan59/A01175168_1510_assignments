@@ -145,6 +145,23 @@ def fight_or_flight_choice(monster, character):
     return result
 
 
+def heal(character):
+    """
+    Heal character.
+
+    :param character: a dictionary
+    :precondition: character must be a dictionary
+    :postcondition: heal character
+    """
+    if character['HP'][0] < 10:
+        character['HP'][0] += 2
+        print(character["Name"] + " has regained 2 HP!")
+        if character["HP"][0] > 10:
+            character['HP'][0] = 10
+            print(character["Name"] + " has full HP!")
+
+
+
 
 if __name__ == "__main__":
     doctest.testmod()
