@@ -2,15 +2,23 @@ from unittest import TestCase
 from A3.sud import check_if_win
 
 
-class TestCheck_if_win(TestCase):
+class TestCheckIfWin(TestCase):
     def test_check_if_win_true(self):
-        pass
+        expected = True
+        actual = check_if_win(5)
+        self.assertEqual(expected, actual)
 
     def test_check_if_win_false(self):
-        pass
+        expected = False
+        actual = check_if_win(0)
+        self.assertEqual(expected, actual)
 
     def test_check_if_win_true_type(self):
-        pass
+        expected = type(True)
+        actual = type(check_if_win(5))
+        self.assertEqual(expected, actual)
 
     def test_check_if_win_false_type(self):
-        pass
+        expected = type(False)
+        actual = type(check_if_win(0))
+        self.assertEqual(expected, actual)
