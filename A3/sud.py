@@ -80,6 +80,23 @@ def check_first_attack():
     return result
 
 
+def attack(attacker, victim):
+    """
+    Attack another character.
+
+    :param attacker: a dictionary
+    :param victim: a dictionary
+    :precondition: attacker must be a correctly formatted dictionary
+    :precondition:  victim must be a correctly formatted dictionary
+    :postcondition: attacker attacks victim
+    """
+    hit_points = roll_die(1, 6)
+    victim['HP'][1] = victim['HP'][1] - hit_points
+    print("\n" + attacker['Name'] + " dealt " + str(hit_points) + " damage!")
+    if victim['HP'][1] < 0:
+        victim['HP'][1] = 0
+    print(victim['Name'] + " has " + str(victim['HP'][1]) + " HP left.")
+
 
 
 if __name__ == "__main__":
