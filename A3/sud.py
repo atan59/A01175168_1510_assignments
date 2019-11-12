@@ -91,11 +91,11 @@ def attack(attacker, victim):
     :postcondition: attacker attacks victim
     """
     hit_points = roll_die(1, 6)
-    victim['HP'][1] = victim['HP'][1] - hit_points
+    victim['HP'][0] = victim['HP'][0] - hit_points
     print("\n" + attacker['Name'] + " dealt " + str(hit_points) + " damage!")
-    if victim['HP'][1] < 0:
-        victim['HP'][1] = 0
-    print(victim['Name'] + " has " + str(victim['HP'][1]) + " HP left.")
+    if victim['HP'][0] < 0:
+        victim['HP'][0] = 0
+    print(victim['Name'] + " has " + str(victim['HP'][0]) + " HP left.")
 
 
 def check_if_alive(character):
@@ -106,8 +106,17 @@ def check_if_alive(character):
     :precondition: character must be a correctly formatted dictionary
     :postcondition: check if character is alive
     :return: a boolean
+
+    >>> check_if_alive({'Name': 'Test', 'HP': [0, 10]})
+    <BLANKLINE>
+    Test is dead!
+    False
+    >>> check_if_alive({'Name': 'Test', 'HP': [1, 10]})
+    <BLANKLINE>
+    Test is alive!
+    True
     """
-    if character['HP'][1] == 0:
+    if character['HP'][0] == 0:
         print("\n" + character['Name'] + " is dead!")
         result = False
     else:
@@ -152,6 +161,12 @@ def heal(character):
     :param character: a dictionary
     :precondition: character must be a dictionary
     :postcondition: heal character
+
+    >>> heal({'Name': 'Test', 'HP': [1, 10]})
+    Test has regained 2 HP!
+    >>> heal({'Name': 'Test', 'HP': [9, 10]})
+    Test has regained 2 HP!
+    Test has full HP!
     """
     if character['HP'][0] < 10:
         character['HP'][0] += 2
@@ -195,6 +210,11 @@ def check_if_win(monsters_killed):
     :precondition: monsters_killed must be an int
     :postcondition: check if 5 monsters have been killed
     :return: a boolean
+
+    >>> check_if_win(0)
+    False
+    >>> check_if_win(5)
+    True
     """
     if monsters_killed == 5:
         result = True
