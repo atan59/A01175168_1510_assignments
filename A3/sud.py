@@ -62,6 +62,25 @@ def combat_round(character, monster):
             attack(monster, character)
 
 
+def check_first_attack():
+    """
+    Check which opponent attacks first.
+
+    :return: an int
+    """
+    opponent_one = 0
+    opponent_two = 0
+    while opponent_one == opponent_two:
+        opponent_one = roll_die(1, 3)
+        opponent_two = roll_die(1, 3)
+    if opponent_one > opponent_two:
+        result = 1
+    else:
+        result = 2
+    return result
+
+
+
 
 if __name__ == "__main__":
     doctest.testmod()
