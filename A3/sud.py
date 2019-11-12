@@ -98,6 +98,25 @@ def attack(attacker, victim):
     print(victim['Name'] + " has " + str(victim['HP'][1]) + " HP left.")
 
 
+def check_if_alive(character):
+    """
+    Check if character is alive.
+
+    :param character: a dictionary
+    :precondition: character must be a correctly formatted dictionary
+    :postcondition: check if character is alive
+    :return: a boolean
+    """
+    if character['HP'][1] == 0:
+        print("\n" + character['Name'] + " is dead!")
+        result = False
+    else:
+        print("\n" + character['Name'] + " is alive!")
+        result = True
+    return result
+
+
+
 
 if __name__ == "__main__":
     doctest.testmod()
