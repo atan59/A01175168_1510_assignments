@@ -2,7 +2,7 @@ from unittest import TestCase
 from A3.sud import check_if_alive
 
 
-class TestCheck_if_alive(TestCase):
+class TestCheckIfAlive(TestCase):
     def test_check_if_alive_true(self):
         expected = True
         actual = check_if_alive({'Name': 'Test', 'HP': [1, 10]})

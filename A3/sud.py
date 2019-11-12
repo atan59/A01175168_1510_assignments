@@ -71,8 +71,8 @@ def check_first_attack():
     opponent_one = 0
     opponent_two = 0
     while opponent_one == opponent_two:
-        opponent_one = roll_die(1, 3)
-        opponent_two = roll_die(1, 3)
+        opponent_one = roll_die(1, 2)
+        opponent_two = roll_die(1, 2)
     if opponent_one > opponent_two:
         result = 1
     else:
