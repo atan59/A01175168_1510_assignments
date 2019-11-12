@@ -161,6 +161,49 @@ def heal(character):
             print(character["Name"] + " has full HP!")
 
 
+def make_a_move(board, character, direction):
+    """
+    Move character on the board.
+
+    :param board: a list
+    :param character: a dictionary
+    :param direction: a string
+    :precondition: board must be a list with tuples
+    :precondition: character must be a dictionary
+    :precondition: direction must be a string
+    :postcondition: move character
+    :return: an int
+    """
+    result = 0
+    move_character(character, direction)
+    if check_monster_encounter_chance():
+        print_board(character)
+        monster = create_monster()
+        result = fight_or_flight_choice(monster, character)
+        print_board(character)
+    else:
+        print_board(character)
+        heal(character)
+    return result
+
+
+def check_if_win(monsters_killed):
+    """
+    Check if 5 monsters have been killed.
+
+    :param monsters_killed: an int
+    :precondition: monsters_killed must be an int
+    :postcondition: check if 5 monsters have been killed
+    :return: a boolean
+    """
+    if monsters_killed == 5:
+        result = True
+    else:
+        result = False
+    return result
+
+
+
 
 
 if __name__ == "__main__":
