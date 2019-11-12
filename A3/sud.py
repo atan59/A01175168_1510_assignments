@@ -203,7 +203,43 @@ def check_if_win(monsters_killed):
     return result
 
 
-
+def main():
+    """
+    Runs the game.
+    """
+    is_playing = True
+    is_alive = True
+    game_won = False
+    monsters_killed = 0
+    board = make_board()
+    print_backstory()
+    character = create_character()
+    print_board(character)
+    while is_playing and is_alive and not game_won:
+        choice = get_user_choice()
+        if choice == 'q':
+            print("You are now exiting the game.")
+            is_playing = False
+        else:
+            while not validate_move(board, character, choice):
+                print_board(character)
+                print("*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\nYou can't move in that direction!\n" +
+                      "*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*")
+                choice = get_user_choice()
+                if choice == 'q':
+                    print("You are now exiting the game.")
+                    is_playing = False
+            move_result = make_a_move(board, character, choice)
+            monsters_killed += move_result
+            print("You have killed " + str(monsters_killed) + " monsters!")
+            if not check_if_alive(character):
+                print("*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\nOh no! You have been defeated by the monster!\n" +
+                      "Try again next time!\n*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\n")
+                is_alive = False
+            if check_if_win(monsters_killed):
+                print("You've defeated 5 monsters!\nCongratulations on completing your quest!")
+                game_won = True
+                is_playing = False
 
 
 if __name__ == "__main__":
