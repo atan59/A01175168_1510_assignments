@@ -25,6 +25,24 @@ def make_board():
     return board
 
 
+def print_board(character_stats):
+    """
+    Print the map.
+
+    :param character_stats: a dictionary
+    """
+    printed_board = []
+    for i in range(0, 5):
+        for j in range(0, 5):
+            if (i, j) == character_stats['Current Position']:
+                printed_board.append("▣")
+            else:
+                printed_board.append("◻")
+        printed_board.append("\n")
+    print("*~~~~~~~~~~MAP~~~~~~~~~~*\n")
+    print("".join(printed_board))
+
+
 
 
 if __name__ == "__main__":
