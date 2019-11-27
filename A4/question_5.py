@@ -25,7 +25,7 @@ def cash_money(amount: float) -> dict:
     try:
         if amount < 0 or type(amount) != float:
             raise ValueError("This is not a valid amount!")
-    except ValueError as e:
+    except (ValueError, TypeError) as e:
         print("Error: " + str(e))
     else:
         while amount != 0:
